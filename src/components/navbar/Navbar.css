@@ -1,0 +1,28 @@
+.wrapper {
+    /* background: url('../../images/trello-report-banner.png'); */
+    background-color:#ffffff;
+    /* background-repeat: no-repeat; */
+    /* background-size: 300px 100px; */
+    height: 190px;
+    width: 100%;
+    z-index: 1;
+    /* color: #fff;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    height: 100px */
+    /* background-size: 1000px; */
+    /* margin-top: 3vh;*/
+}
+
+.wrapper2 {
+    background-color:#332f43;
+    height: 103.5px;
+    width: 100%;
+    z-index: -1
+}
+/* 
+.logo {
+    background-image: url('../../images/trello-report-banner.png');
+    height: 100px;
+    width: 500px;
+} */
