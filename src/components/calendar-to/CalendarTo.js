@@ -19,22 +19,32 @@ export default class DatePickerValueto extends React.Component {
         //this.sendData = this.sendData.bind();
 
         this.state = {
-            controlledDateTo: moment().format('YYYY-MM-DD'),
+            controlledDateTo: moment('').format('YYYY-MM-DD'),
             formattedDateTo: moment(controlledDateTo).format('YYYY-MM-DD')
         };
         // console.log(this.state.controlledDateTo)
     }
 
-    handleToChange = (event, date) => {
+    handleToChange = (date, event) => {
         this.setState({
-            controlledDateTo: date,
-            formattedDateTo: moment(date).format('YYYY-MM-DD')
-        });
-        // console.log(this.state.controlledDateTo)
-       // console.log(this.state.formattedDateTo)
-       this.props.sendDatato(this.state.formattedDateTo);
-
+            controlledDateTo: event,
+      },function(){
+          const formattedDateTo = moment(this.state.controlledDateTo).format('YYYY-MM-DD')
+          console.log(formattedDateTo)
+          this.props.sendDatato(formattedDateTo);
+      });
     };
+
+    // handleToChange = (event, date) => {     
+    //     this.setState({
+    //         controlledDateTo: date,
+    //         formattedDateTo: moment(date).format('YYYY-MM-DD')
+    //     });
+    //     // console.log(this.state.controlledDateTo)
+    //    // console.log(this.state.formattedDateTo)
+    //    this.props.sendDatato(this.state.formattedDateTo);
+
+    // };
 
 //    onchangename(){
 //         var date =  this.state.formattedDateTo

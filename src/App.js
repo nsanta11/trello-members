@@ -84,7 +84,7 @@ class App extends Component {
   storeFrom(val) {
     window.from = val
     console.log(val)
-    console.log(window.to)
+    // console.log(window.to)
     console.log("https://www.gcumedia.com/sample-data/api/reporting/activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to)
   }
 
