@@ -18,6 +18,7 @@ import formattedDateTo from "./components/calendar-to/CalendarTo.js";
 
 // console.log(query);
 
+
 class App extends Component {
 
   constructor(props) {
@@ -58,14 +59,14 @@ class App extends Component {
   // }
 
   componentDidMount() {
-    fetch("https://www.gcumedia.com/sample-data/api/reporting/activeMemberCount-licensedMemberCount-inactiveMemberCount/start/2000-01-01/end/2018-09-08")
+    fetch("https://www.gcumedia.com/sample-data/api/reporting/deletedBoardCount-activeBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/2000-01-01/end/2018-09-08")
       .then(response => {
         return response.json();
       }).then(data => {
 
         console.log(data)
         let members = data
-      
+        console.log(members.deletedBoardCount)
         console.log((members.activeMemberCount))
         console.log((members.inactiveMemberCount))
         this.setState({ members })
@@ -123,15 +124,24 @@ class App extends Component {
             {/* endDate={this.state.formattedDateTo} */}
           </MuiThemeProvider>
         </div>
+        <div>
+          <MemberCard activeMembers={this.state.members.activeMemberCount} />
+        </div>
 
         <div className="container2">
           <div className="container1">
             <h1>Members</h1>
-            <p>{this.state.members.activeMemberCount}
+            <p>Active: {this.state.members.activeMemberCount}
             </p>
-            <p>{this.state.members.inactiveMemberCount}
+            <p>Inactive: {this.state.members.inactiveMemberCount}
             </p>
-            <p>{this.state.members.licensedMemberCount}
+            <p>Licensed: {this.state.members.licensedMemberCount}
+            </p>
+            <p>Active Boards: {this.state.members.activeBoardCount}
+            </p>
+            <p>Deleted Boards: {this.state.members.deletedBoardCount}
+            </p>
+            <p>Archived Boards: {this.state.members.archivedBoardCount}
             </p>
           </div>
         </div>
