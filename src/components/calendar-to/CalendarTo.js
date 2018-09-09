@@ -1,10 +1,7 @@
 
 import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
-// import Moment from 'react-moment';
 import moment from 'moment'
-// import 'moment-timezone';
-// import ReactDOM from 'react-dom'
 // import DatePicker from 'material-ui/core/Datepicker'
 
 /**
@@ -13,36 +10,35 @@ import moment from 'moment'
  * To display the year selection first, set the `openToYearSelection` property to `true`.
  */
 
-let controlledDateFrom = ('2000-01-01');
+let controlledDateTo = moment()
 
-export default class DatePickerValueFrom extends React.Component {
-
+export default class DatePickerValueTo extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            controlledDateFrom: moment('2000-01-01').format('YYYY-MM-DD'),
-            formattedDateFrom: moment(controlledDateFrom).format('YYYY-MM-DD')
+            controlledDateTo: moment().format('YYYY-MM-DD'),
+            formattedDateTo: moment(controlledDateTo).format('YYYY-MM-DD')
         };
-        console.log(this.state.controlledDateFrom)
+        console.log(this.state.controlledDateTo)
     }
 
     handleChange = (event, date) => {
         this.setState({
-            controlledDateFrom: date,
-            formattedDateFrom: moment(date).format('YYYY-MM-DD')
+            controlledDateTo: date,
+            formattedDateTo: moment(date).format('YYYY-MM-DD')
         });
-        console.log(this.state.controlledDateFrom)
-        console.log(this.state.formattedDateFrom)
+        console.log(this.state.controlledDateTo)
+        console.log(this.state.formattedDateTo)
     };
 
     render() {
         return (
-            <div className="pickerOne">
+            <div className="pickerTwo">
                 <DatePicker
-                    hintText="From"
-                    value={this.state.controlledDateFrom}
+                    hintText="To"
+                    value={this.state.controlledDateTo}
                     onChange={this.handleChange}
                 />
             </div>

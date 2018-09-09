@@ -12,8 +12,10 @@ const NavBar = () => {
             <AppBar position="static">
                 {/* <Toolbar> */}
                 <div className="wrapper">
-                    <div className="wrapper2">
-                        <img src={logo} alt={"logo"} width={350} />
+                    <div className="wrapper1">
+                        <div className="wrapper2">
+                            <img src={logo} alt={"logo"} width={350} />
+                        </div>
                     </div>
                 </div>
                 {/* </Toolbar> */}
