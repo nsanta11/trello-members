@@ -25,25 +25,28 @@ export default class DatePickerValueFrom extends React.Component {
             controlledDateFrom: moment('2000-01-01').format('YYYY-MM-DD'),
             formattedDateFrom: moment(controlledDateFrom).format('YYYY-MM-DD')
         };
-        console.log(this.state.controlledDateFrom)
+        // console.log(this.state.controlledDateFrom)
     }
 
-    handleChange = (event, date) => {
+    handleFromChange = (event, date) => {
         this.setState({
             controlledDateFrom: date,
             formattedDateFrom: moment(date).format('YYYY-MM-DD')
         });
-        console.log(this.state.controlledDateFrom)
-        console.log(this.state.formattedDateFrom)
+        // console.log(this.state.controlledDateFrom)
+       // console.log(this.state.formattedDateFrom)
+        this.props.sendDatafrom(this.state.formattedDateFrom);
+
     };
 
-    render() {
+    
+    render(props) {
         return (
             <div className="pickerOne">
                 <DatePicker
                     hintText="From"
                     value={this.state.controlledDateFrom}
-                    onChange={this.handleChange}
+                    onChange={this.handleFromChange}
                 />
             </div>
         );

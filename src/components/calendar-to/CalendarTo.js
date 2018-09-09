@@ -12,35 +12,45 @@ import moment from 'moment'
 
 let controlledDateTo = moment()
 
-export default class DatePickerValueTo extends React.Component {
+export default class DatePickerValueto extends React.Component {
 
     constructor(props) {
         super(props);
+        //this.sendData = this.sendData.bind();
 
         this.state = {
             controlledDateTo: moment().format('YYYY-MM-DD'),
             formattedDateTo: moment(controlledDateTo).format('YYYY-MM-DD')
         };
-        console.log(this.state.controlledDateTo)
+        // console.log(this.state.controlledDateTo)
     }
 
-    handleChange = (event, date) => {
+    handleToChange = (event, date) => {
         this.setState({
             controlledDateTo: date,
             formattedDateTo: moment(date).format('YYYY-MM-DD')
         });
-        console.log(this.state.controlledDateTo)
-        console.log(this.state.formattedDateTo)
+        // console.log(this.state.controlledDateTo)
+       // console.log(this.state.formattedDateTo)
+       this.props.sendDatato(this.state.formattedDateTo);
+
     };
 
-    render() {
+//    onchangename(){
+//         var date =  this.state.formattedDateTo
+//         this.props.onSelectdate(date);
+//      }
+
+
+    render(props) {
         return (
             <div className="pickerTwo">
                 <DatePicker
                     hintText="To"
                     value={this.state.controlledDateTo}
-                    onChange={this.handleChange}
+                    onChange={this.handleToChange}
                 />
+
             </div>
         );
     }
