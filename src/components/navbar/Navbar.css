@@ -30,11 +30,15 @@
     /* margin-top: 3vh;*/
 }
 
+.logo {
+    margin-left: -70%;
+}
+
 .wrapper2 {
     background-color:#332f43;
     height: 103.5px;
     width: 100%;
-    z-index: -1
+    z-index: -1;
 }
 /* 
 .logo {

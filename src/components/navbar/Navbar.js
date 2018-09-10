@@ -14,7 +14,7 @@ const NavBar = () => {
                 <div className="wrapper">
                     <div className="wrapper1">
                         <div className="wrapper2">
-                            <img src={logo} alt={"logo"} width={350} />
+                            <img className="logo" src={logo} alt={"logo"} width={350} />
                         </div>
                     </div>
                 </div>

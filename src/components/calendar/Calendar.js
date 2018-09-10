@@ -47,9 +47,7 @@ export default class DatePickerValueFrom extends React.Component {
             console.log(formattedDateFrom)
             this.props.sendDatafrom(formattedDateFrom);
         });
-        
-       //console.log(this.date)
-        // console.log(this.state.controlledDateFrom)
+     
  
     };
     

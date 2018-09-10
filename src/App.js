@@ -1,28 +1,54 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom'
 // import logo from './logo.svg';
-import axios from "axios";
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles';
+import moment from 'moment'
+import Grid from '@material-ui/core/Grid';
 import './App.css';
+import Card from '@material-ui/core/Card'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import NavBar from "./components/navbar/Navbar.js";
 import MemberCard from "./components/member/MemberCard";
+import ButtonYesterday from "./components/filterYesterday/FilterYesterday";
 import DatePickerValueFrom from "./components/calendar/Calendar.js";
 import DatePickerValueTo from "./components/calendar-to/CalendarTo.js";
+// import GuttersGrid from "./components/grid/Grid.js";
 import formattedDateFrom from "./components/calendar/Calendar.js";
 import formattedDateTo from "./components/calendar-to/CalendarTo.js";
+import { grey100 } from 'material-ui/styles/colors';
 // import moment from 'moment'
 // import MemberData from "./components/data/MemberData.js";
 // import MemberCard  from "./components/member/MemberCard.js"
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: grey100
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: theme.spacing.unit * 2,
+  },
 
-// const query = "https://www.gcumedia.com/sample-data/api/reporting/activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + formattedDateFrom + "/end/" + formattedDateTo
+  // card: {
+  //   maxWidth: 275,
+  //   backgroundColor: 'white',
+  // },
 
-// console.log(query);
+});
+
+
+
 
 
 class App extends Component {
 
   constructor(props) {
     super(props)
+    // this.fetchData = this.fetchData.bind(this);
     this.state = {
       formattedDateFrom: '',
       formattedDateTo,
@@ -32,73 +58,81 @@ class App extends Component {
       data: null,
       member: ""
     }
-
-  }
-  // state = {
-  //   formattedDateFrom,
-  //   formattedDateTo,
-  // };
-
-
-  // getMemberData = () => {
-  //   return axios.get(query).then(response => console.log(response));
-  // }
-
-  //working for console.log!!!!
-  // componentDidMount() {
-  //   fetch("https://www.gcumedia.com/sample-data/api/reporting/activeMemberCount-licensedMemberCount-inactiveMemberCount/start/2000-01-01/end/2018-09-08")
-  //     .then(response => response.json())
-  //     .then((data ) => {
-  //       console.log((data.activeMemberCount));
-  //       console.log((data.inactiveMemberCount))
-  //       data.toString();
-  //       console.log(this.state.members)
-  //       // let members = data
-  // })
-  //   // this.setState({members})
-  // }
-
-  componentDidMount() {
-    fetch("https://www.gcumedia.com/sample-data/api/reporting/deletedBoardCount-activeBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/2000-01-01/end/2018-09-08")
-      .then(response => {
-        return response.json();
-      }).then(data => {
-
-        console.log(data)
-        let members = data
-        console.log(members.deletedBoardCount)
-        console.log((members.activeMemberCount))
-        console.log((members.inactiveMemberCount))
-        this.setState({ members })
-        console.log("state", this.state.members)
-
-      })
-
   }
 
-  storeTo(val) {
+  handleClick = () => {
+    console.log("yes!")
+    let yesterday = moment().add(-1, 'days')
+    console.log(yesterday)
+    const date = yesterday.format('YYYY-MM-DD')
+    // .format('YYYY-MM-DD'),
+    if (date) {
+
+      fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/" + yesterday)
+
+        .then(response => {
+          return response.json();
+        }).then(data => {
+
+          console.log(data)
+          let members = data
+          console.log(members.deletedBoardCount)
+          console.log((members.activeMemberCount))
+          console.log((members.inactiveMemberCount))
+          this.setState({ members })
+          console.log("state", this.state.members)
+
+
+
+        })
+
+    }
+  }
+
+
+  storeTo = (val) => {
     window.to = val
     console.log(val)
+    if (window.from) {
+      console.log("if")
+
+      fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to)
+
+        .then(response => {
+          return response.json();
+        }).then(data => {
+
+          console.log(data)
+          let members = data
+          console.log(members.deletedBoardCount)
+          console.log((members.activeMemberCount))
+          console.log((members.inactiveMemberCount))
+          this.setState({ members })
+          console.log("state", this.state.members)
+          console.log(window.to)
+
+
+        })
+
+    }
   }
 
   storeFrom(val) {
     window.from = val
     console.log(val)
-    // console.log(window.to)
-    console.log("https://www.gcumedia.com/sample-data/api/reporting/activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to)
   }
-
-  // "https://www.gcumedia.com/sample-data/api/reporting/activeMemberCount-licensedMemberCount-inactiveMemberCount/start/2000-01-01/end/2018-09-08"
 
 
   render() {
 
     // const { isLoading, error } = this.state;
-    const { members } = this.state;
+    const { members, yesterday } = this.state
+    const customColumnStyle = { width: 200, height: 250, backgroundColor: 'white', align: 'left' };
+
 
     return (
       <div className="App">
-        <Calendar-to />;
+        <Calendar-to />
         <div>
           <NavBar />
           {/* <MemberData /> */}
@@ -113,38 +147,28 @@ class App extends Component {
           Filters
         </p>
         <div>
-
           <MuiThemeProvider>
             <DatePickerValueFrom sendDatafrom={this.storeFrom} />
           </MuiThemeProvider>
         </div>
+
         <div>
           <MuiThemeProvider>
             <DatePickerValueTo sendDatato={this.storeTo} />
             {/* endDate={this.state.formattedDateTo} */}
           </MuiThemeProvider>
         </div>
+        {/* <div>
+          <GuttersGrid />
+        </div> */}
         <div>
-          <MemberCard activeMembers={this.state.members.activeMemberCount} />
+          <ButtonYesterday onClick={this.handleClick} />
         </div>
 
-        <div className="container2">
-          <div className="container1">
-            <h1>Members</h1>
-            <p>Active: {this.state.members.activeMemberCount}
-            </p>
-            <p>Inactive: {this.state.members.inactiveMemberCount}
-            </p>
-            <p>Licensed: {this.state.members.licensedMemberCount}
-            </p>
-            <p>Active Boards: {this.state.members.activeBoardCount}
-            </p>
-            <p>Deleted Boards: {this.state.members.deletedBoardCount}
-            </p>
-            <p>Archived Boards: {this.state.members.archivedBoardCount}
-            </p>
-          </div>
+        <div>
+          <MemberCard activeMembers={this.state.members.activeMemberCount} inactiveMembers={this.state.members.inactiveMemberCount} licensedMembers={this.state.members.licensedMemberCount} activeBoard={this.state.members.activeBoardCount} deletedBoard={this.state.members.deletedBoardCount} archivedBoard={this.state.members.archivedBoardCount} />
         </div>
+
       </div>
 
     );
