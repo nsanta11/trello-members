@@ -3,6 +3,8 @@ import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
 // import Moment from 'react-moment';
 import moment from 'moment'
+import { createMuiTheme } from '@material-ui/core'
+import { purple600 } from 'material-ui/styles/colors';
 // import 'moment-timezone';
 // import ReactDOM from 'react-dom'
 // import DatePicker from 'material-ui/core/Datepicker'
@@ -12,6 +14,16 @@ import moment from 'moment'
  * You can also disable the Dialog passing `true` to the `disabled` property.
  * To display the year selection first, set the `openToYearSelection` property to `true`.
  */
+
+export const customTheme = createMuiTheme({
+	palette: {
+		primary: {
+			main: purple600,
+		},
+		
+	},
+})
+
 
 let controlledDateFrom = ('2000-01-01');
 
@@ -54,8 +66,9 @@ export default class DatePickerValueFrom extends React.Component {
     render(props) {
         return (
             <div className="pickerOne">
-                <DatePicker
+                <DatePicker className="calendarOne"
                     hintText="From"
+                    inputStyle={{ textAlign: 'left' }}
                     onChange={this.handleFromChange}
                     value={this.state.controlledDateFrom}   
                 />

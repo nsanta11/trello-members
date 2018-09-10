@@ -35,6 +35,7 @@ export default class DatePickerValueto extends React.Component {
       });
     };
 
+    
     // handleToChange = (event, date) => {     
     //     this.setState({
     //         controlledDateTo: date,
@@ -60,7 +61,6 @@ export default class DatePickerValueto extends React.Component {
                     value={this.state.controlledDateTo}
                     onChange={this.handleToChange}
                 />
-
             </div>
         );
     }
