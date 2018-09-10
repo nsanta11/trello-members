@@ -15,19 +15,18 @@ const styles = theme => ({
     },
 });
 
-const ButtonYesterday = (props) => {
+const ButtonStyled = (props) => {
     const { classes } = props;
     return (
         <div>
             <Button variant="contained" className={classes.button}
-                Yesterday
-                onClick={props.handleClick}
+            onClick={props.handleClick}
             />
         </div>
     )
 }
 
-export default withStyles(styles)(ButtonYesterday);
+export default withStyles(styles)(ButtonStyled);
 
 
 // class ContainedButton extends React.Component {

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
+import {Helmet} from 'react-helmet';
 // import ReactDOM from 'react-dom'
 // import logo from './logo.svg';
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment'
-import Grid from '@material-ui/core/Grid';
 import './App.css';
-import Card from '@material-ui/core/Card'
+import ButtonStyled  from  "./components/filterYesterday/FilterYesterday";
 import customTheme from "./components/calendar/Calendar.js";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import NavBar from "./components/navbar/Navbar.js";
 import MemberCard from "./components/member/MemberCard";
-import ButtonYesterday from "./components/filterYesterday/FilterYesterday";
 import DatePickerValueFrom from "./components/calendar/Calendar.js";
 import DatePickerValueTo from "./components/calendar-to/CalendarTo.js";
 // import GuttersGrid from "./components/grid/Grid.js";
@@ -31,7 +30,7 @@ const styles = theme => ({
     backgroundColor: grey100
   },
 
-  button1: {
+  button: {
     margin: theme.spacing.unit,
     backgroundColor: purple600,
     color: white
@@ -67,7 +66,7 @@ class App extends Component {
       members: [],
       error: null,
       data: null,
-      member: ""
+      member: "",
     }
   }
 
@@ -158,13 +157,18 @@ class App extends Component {
   render() {
 
     // const { isLoading, error } = this.state;
-    const { members, yesterday } = this.state
-    const customColumnStyle = { width: 200, height: 250, backgroundColor: 'white', align: 'left' };
+    const { members, yesterday, button } = this.state
+    // const customColumnStyle = { width: 200, height: 250, backgroundColor: 'white', align: 'left' };
+  
 
 
     return (
+      
       <div className="App">
         <Calendar-to />
+        <Helmet>
+                <style>{'body { background-color: #eaeaea; }'}</style>
+            </Helmet>
         <div>
           <NavBar />
           {/* <MemberData /> */}
@@ -194,7 +198,7 @@ class App extends Component {
           <GuttersGrid />
         </div> */}
         <div>
-          <Button variant="contained" color="primary" className="button1" onClick={(e) => this.handleClick(e, 1800)}>
+        <Button variant="contained" className="button1" onClick={(e) => this.handleClick(e, 1800)}>
             All Time
           </Button>
         </div>
@@ -219,8 +223,8 @@ class App extends Component {
           </Button>
         </div>
         <div>
-          <Button variant="contained" color="secondary" className="button1" onClick={(e) => this.clearData()}>
-            Clear
+          <Button variant="contained" className="button2" onClick={(e) => this.clearData()}>
+            Clear Filter
           </Button>
         </div>
 

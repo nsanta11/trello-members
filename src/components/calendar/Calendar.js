@@ -1,6 +1,7 @@
 
 import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
+import './Calendar.css';
 // import Moment from 'react-moment';
 import moment from 'moment'
 import { createMuiTheme } from '@material-ui/core'
@@ -28,7 +29,6 @@ export const customTheme = createMuiTheme({
 let controlledDateFrom = ('2000-01-01');
 
 export default class DatePickerValueFrom extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -62,15 +62,17 @@ export default class DatePickerValueFrom extends React.Component {
      
  
     };
-    
     render(props) {
+      
+
         return (
             <div className="pickerOne">
                 <DatePicker className="calendarOne"
                     hintText="From"
                     inputStyle={{ textAlign: 'left' }}
                     onChange={this.handleFromChange}
-                    value={this.state.controlledDateFrom}   
+                    value={this.state.controlledDateFrom} 
+                 
                 />
             </div>
         );

@@ -2,6 +2,7 @@
 import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import moment from 'moment'
+import './CalendarTo.css';
 // import DatePicker from 'material-ui/core/Datepicker'
 
 /**
@@ -35,28 +36,11 @@ export default class DatePickerValueto extends React.Component {
       });
     };
 
-    
-    // handleToChange = (event, date) => {     
-    //     this.setState({
-    //         controlledDateTo: date,
-    //         formattedDateTo: moment(date).format('YYYY-MM-DD')
-    //     });
-    //     // console.log(this.state.controlledDateTo)
-    //    // console.log(this.state.formattedDateTo)
-    //    this.props.sendDatato(this.state.formattedDateTo);
-
-    // };
-
-//    onchangename(){
-//         var date =  this.state.formattedDateTo
-//         this.props.onSelectdate(date);
-//      }
-
 
     render(props) {
         return (
             <div className="pickerTwo">
-                <DatePicker
+                <DatePicker className="calendarTwo"
                     hintText="To"
                     value={this.state.controlledDateTo}
                     onChange={this.handleToChange}

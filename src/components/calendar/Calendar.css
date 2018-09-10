@@ -1,3 +1,7 @@
 .calendarOne {
-    margin-left: -60%
+    margin-left: -65% !important;
+}
+
+.pickerOne {
+    color: black !important; 
 }
