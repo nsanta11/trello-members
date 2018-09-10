@@ -121,31 +121,51 @@ class App extends Component {
     this.DatePickerValueTo.state = null;
   }
 
+  // fetchData = (url) => {
+  //   console.log(url)
+  //   return fetch(url)
+  //         .then(response => {
+  //         response.json();
+  //         })
+     
+  // }
+
   storeTo = (val) => {
     window.to = val
     console.log(val)
+    // console.log("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + window.from + "/end/" + window.to)
+
     if (window.from) {
-      console.log("if")
+      
+      // fetchData("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to).then
+      Promise.all([
+      fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to),
+       fetch
+      ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + window.from + "/end/" + window.to)
+       ])
+      .then(([response1,response2]) => Promise.all([response1.json(),response2.json()]))
+      .then(([data1,data2]) => {
+        
 
-      fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to)
-
-        .then(response => {
-          return response.json();
-        }).then(data => {
-
-          console.log(data)
-          let members = data
+          // console.log(dataActions)
+          console.log(data1)
+          console.log(data2)
+          let members = data1
+          let actions = data2
+          console.log(actions.actionCounts.commentCard)
           console.log(members.deletedBoardCount)
           console.log((members.activeMemberCount))
           console.log((members.inactiveMemberCount))
           this.setState({ members })
+          this.setState({ actions })
+
           console.log("state", this.state.members)
           console.log(window.to)
-
-
         })
-
-    }
+       
+          }
+// 
+        
   }
 
   storeFrom(val) {
