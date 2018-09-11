@@ -2,10 +2,9 @@
 # Trello-Members App
 App to sort and report membership and activy details by date
 
-#Technologies: 
-React
-Material UI
-Node
+## Technologies: 
+
+React, Material UI, Node
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
