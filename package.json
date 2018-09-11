@@ -2,10 +2,12 @@
   "name": "trello-members",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nsanta11.github.io/trello-members",
   "dependencies": {
     "@material-ui/core": "^3.0.2",
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
+    "gh-pages": "^1.2.0",
     "material-ui": "^0.19.4",
     "material-ui-datetimepicker": "^1.0.7",
     "material-ui-pickers": "^1.0.0-rc.14",
@@ -18,6 +20,8 @@
     "react-sticky-footer": "^0.1.0-rc3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
