@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 // import ReactDOM from 'react-dom'
 // import logo from './logo.svg';
 import Typography from '@material-ui/core/Typography'
@@ -7,11 +7,12 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment'
 import './App.css';
-import ButtonStyled  from  "./components/filterYesterday/FilterYesterday";
+import ButtonStyled from "./components/filterYesterday/FilterYesterday";
 import customTheme from "./components/calendar/Calendar.js";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import NavBar from "./components/navbar/Navbar.js";
 import MemberCard from "./components/member/MemberCard";
+import StickyFooter from "./components/footer/Footer.js";
 import DatePickerValueFrom from "./components/calendar/Calendar.js";
 import DatePickerValueTo from "./components/calendar-to/CalendarTo.js";
 import GuttersGrid from "./components/grid/Grid.js";
@@ -67,20 +68,20 @@ class App extends Component {
 
     }
   }
-componentWillMount = (e) =>{
-  let today = moment().format('YYYY-MM-DD')
+  componentWillMount = (e) => {
+    let today = moment().format('YYYY-MM-DD')
     console.log(today)
-    
+
     // DatePickerValueFrom.resetDate()
     // document.getElementById("fromDate").value = "j";
     // this.setState({controlledDateFrom: ""})
 
-  Promise.all([
-    fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/2000-01-01/end/" + today),
-    fetch
-    ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start/2000-01-01/end/" + today)])
-    .then(([response1,response2]) => Promise.all([response1.json(),response2.json()]))
-       .then(([data1,data2]) => {
+    Promise.all([
+      fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/2000-01-01/end/" + today),
+      fetch
+        ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start/2000-01-01/end/" + today)])
+      .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
+      .then(([data1, data2]) => {
 
         console.log(data1)
         console.log(data2)
@@ -91,20 +92,20 @@ componentWillMount = (e) =>{
         console.log((members.activeMemberCount))
         console.log((members.inactiveMemberCount))
         this.setState({ members })
-        this.setState({ actions})
+        this.setState({ actions })
 
         console.log("state", this.state.members)
         console.log("state", this.state.actions)
         let action = actions.actionCounts
-        this.setState({action})
+        this.setState({ action })
         console.log(this.state.actions.actionCounts.commentCard)
         console.log(window.to)
       })
-     
-        
-      
-}
-  
+
+
+
+  }
+
   handleClick = (e, days) => {
     // const date = 0
     // if (days == 6){
@@ -127,37 +128,37 @@ componentWillMount = (e) =>{
     // .format('YYYY-MM-DD'),
     if (date) {
       console.log(("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + date + "/end/" + today))
-      
-    Promise.all([
-      //api fetch to url with selected dates
-      fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + date + "/end/" + today),
-      fetch
-      ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + date + "/end/" + today)])
-       .then(([response1,response2]) => Promise.all([response1.json(),response2.json()]))
-       .then(([data1,data2]) => {
 
-        console.log(data1)
-        console.log(data2)
-        let members = data1
-        let actions = data2
-        console.log(actions.actionCounts.commentCard)
-        console.log(members.deletedBoardCount)
-        console.log((members.activeMemberCount))
-        console.log((members.inactiveMemberCount))
-        this.setState({ members })
-        this.setState({ actions})
+      Promise.all([
+        //api fetch to url with selected dates
+        fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + date + "/end/" + today),
+        fetch
+          ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + date + "/end/" + today)])
+        .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
+        .then(([data1, data2]) => {
 
-        console.log("state", this.state.members)
-        console.log("state", this.state.actions)
-        let action = actions.actionCounts
-        this.setState({action})
-        console.log(window.to)
-      })
-     
-        }
-      
-}
-        
+          console.log(data1)
+          console.log(data2)
+          let members = data1
+          let actions = data2
+          console.log(actions.actionCounts.commentCard)
+          console.log(members.deletedBoardCount)
+          console.log((members.activeMemberCount))
+          console.log((members.inactiveMemberCount))
+          this.setState({ members })
+          this.setState({ actions })
+
+          console.log("state", this.state.members)
+          console.log("state", this.state.actions)
+          let action = actions.actionCounts
+          this.setState({ action })
+          console.log(window.to)
+        })
+
+    }
+
+  }
+
   //       .then(response => {
   //         return response.json();
   //       }).then(data => {
@@ -184,48 +185,48 @@ componentWillMount = (e) =>{
   }
 
 
-//"to" value from selected calendar date
+  //"to" value from selected calendar date
   storeTo = (val) => {
     window.to = val
     console.log(val)
     // console.log("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + window.from + "/end/" + window.to)
 
     if (window.from) {
-      
+
       // fetchData("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to).then
       Promise.all([
-      fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to),
-      fetch
-      ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + window.from + "/end/" + window.to)
-       ])
-      .then(([response1,response2]) => Promise.all([response1.json(),response2.json()]))
-      .then(([data1,data2]) => {
-        
+        fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to),
+        fetch
+          ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + window.from + "/end/" + window.to)
+      ])
+        .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
+        .then(([data1, data2]) => {
+
 
           // console.log(dataActions)
           console.log(data1)
           console.log(data2)
           let members = data1
           let actions = data2
-      
+
           console.log(actions.actionCounts.commentCard)
           console.log(members.deletedBoardCount)
           console.log((members.activeMemberCount))
           console.log((members.inactiveMemberCount))
           this.setState({ members })
-          this.setState({ actions})
+          this.setState({ actions })
 
           console.log("state", this.state.members)
           console.log("state", this.state.actions)
           let action = actions.actionCounts
-          this.setState({action})
-          
+          this.setState({ action })
+
           console.log(window.to)
         })
-       
-          }
-// 
-        
+
+    }
+    // 
+
   }
 
   storeFrom(val) {
@@ -238,15 +239,15 @@ componentWillMount = (e) =>{
 
     // const { isLoading, error } = this.state;
     // const { members, yesterday, button, actions } = this.state
-    
-  
+
+
     return (
-      
+
       <div className="App">
         <Calendar-to />
         <Helmet>
-                <style>{'body { background-color: #eaeaea; }'}</style>
-            </Helmet>
+          <style>{'body { background-color: #eaeaea; }'}</style>
+        </Helmet>
         <div>
           <NavBar />
           {/* <MemberData /> */}
@@ -271,7 +272,7 @@ componentWillMount = (e) =>{
           <GuttersGrid />
         </div> */}
         <div>
-        <Button variant="contained" className="button1" onClick={(e) => this.handleClick(e, 1800)}>
+          <Button variant="contained" className="button1" onClick={(e) => this.handleClick(e, 1800)}>
             All Time
           </Button>
         </div>
@@ -305,7 +306,10 @@ componentWillMount = (e) =>{
           <MemberCard activeMembers={this.state.members.activeMemberCount} inactiveMembers={this.state.members.inactiveMemberCount} licensedMembers={this.state.members.licensedMemberCount} activeBoard={this.state.members.activeBoardCount} deletedBoard={this.state.members.deletedBoardCount} archivedBoard={this.state.members.archivedBoardCount} />
         </div>
         <div>
-          <FilterYesterday action={this.state.action}/>
+          <FilterYesterday action={this.state.action} />
+        </div>
+        <div>
+          <StickyFooter />
         </div>
 
 

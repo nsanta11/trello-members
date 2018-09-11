@@ -14,7 +14,8 @@
     "react-dom": "^16.5.0",
     "react-helmet": "^5.2.0",
     "react-moment": "^0.7.9",
-    "react-scripts": "1.1.5"
+    "react-scripts": "1.1.5",
+    "react-sticky-footer": "^0.1.0-rc3"
   },
   "scripts": {
     "start": "react-scripts start",

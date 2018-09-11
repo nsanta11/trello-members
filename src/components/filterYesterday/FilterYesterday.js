@@ -34,7 +34,8 @@ function SimpleTable(props) {
     console.log(props.action)
 
     return (
-        <div style={styles.div} id="div">
+        
+        <div style={styles.div}id="div">
             <Paper className={classes.root} id="table">
                 <Table className={classes.table}>
                     <TableHead>
