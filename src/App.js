@@ -15,15 +15,12 @@ import MemberCard from "./components/member/MemberCard";
 import DatePickerValueFrom from "./components/calendar/Calendar.js";
 import DatePickerValueTo from "./components/calendar-to/CalendarTo.js";
 // import GuttersGrid from "./components/grid/Grid.js";
-import formattedDateFrom from "./components/calendar/Calendar.js";
+// import ActivityTable from "./components/activity-table/ActivityTable";
 import formattedDateTo from "./components/calendar-to/CalendarTo.js";
 import { grey100 } from 'material-ui/styles/colors';
 import { purple600, white } from 'material-ui/styles/colors';
 
 
-// import moment from 'moment'
-// import MemberData from "./components/data/MemberData.js";
-// import MemberCard  from "./components/member/MemberCard.js"
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -43,10 +40,6 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
   },
 
-  // card: {
-  //   maxWidth: 275,
-  //   backgroundColor: 'white',
-  // },
 
 });
 
@@ -69,7 +62,28 @@ class App extends Component {
       member: "",
     }
   }
+componentDidMount = (e) =>{
+  let today = moment().format('YYYY-MM-DD')
+    console.log(today)
 
+    fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/2000-01-01/end/" + today)
+    .then(response => {
+      return response.json();
+    }).then(data => {
+
+      console.log(data)
+      let members = data
+      console.log(members.deletedBoardCount)
+      console.log((members.activeMemberCount))
+      console.log((members.inactiveMemberCount))
+      this.setState({ members })
+      console.log("state", this.state.members)
+
+
+    })
+
+}
+  
   handleClick = (e, days) => {
     // const date = 0
     // if (days == 6){
@@ -92,7 +106,8 @@ class App extends Component {
     // .format('YYYY-MM-DD'),
     if (date) {
       console.log(("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + date + "/end/" + today))
-
+      
+      //api fetch to url with selected dates
       fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + date + "/end/" + today)
         .then(response => {
           return response.json();
@@ -112,24 +127,15 @@ class App extends Component {
 
     }
   }
-  //   test = () => {
-  //     console.log("PEW!!!!!!!!!!!!!!!!!!!!")
-  // }
+
+  //clears data in calendar selection and sets data to default
   clearData = () => {
-    console.log("clear?")
-    // this.refs.DatePickerValueTo.setDate();
+    console.log("clear")
     this.DatePickerValueTo.state = null;
   }
 
-  // fetchData = (url) => {
-  //   console.log(url)
-  //   return fetch(url)
-  //         .then(response => {
-  //         response.json();
-  //         })
-     
-  // }
 
+//"to" value from selected calendar date
   storeTo = (val) => {
     window.to = val
     console.log(val)
@@ -178,10 +184,8 @@ class App extends Component {
 
     // const { isLoading, error } = this.state;
     const { members, yesterday, button } = this.state
-    // const customColumnStyle = { width: 200, height: 250, backgroundColor: 'white', align: 'left' };
   
-
-
+  
     return (
       
       <div className="App">
@@ -243,13 +247,16 @@ class App extends Component {
           </Button>
         </div>
         <div>
-          <Button variant="contained" className="button2" onClick={(e) => this.clearData()}>
+          <Button variant="contained" className="button2" onClick={(e) => this.componentDidMount()}>
             Clear Filter
           </Button>
         </div>
 
         <div>
           <MemberCard activeMembers={this.state.members.activeMemberCount} inactiveMembers={this.state.members.inactiveMemberCount} licensedMembers={this.state.members.licensedMemberCount} activeBoard={this.state.members.activeBoardCount} deletedBoard={this.state.members.deletedBoardCount} archivedBoard={this.state.members.archivedBoardCount} />
+        </div>
+        <div>
+          {/* <ActivityTable /> */}
         </div>
 
 

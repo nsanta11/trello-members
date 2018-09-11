@@ -120,13 +120,13 @@ const MemberCard = (props) => {
 
                 <div>
                     <div style={styles.div}>
-                        <Paper zDepth={3} style={styles.paperLeft}>
+                        <Paper style={styles.paperLeft}>
                             <h3>Members</h3>
                             <Typography className={classes.number} gutterBottom variant="headline" component="h1">
                                 <h1>{props.activeMembers}</h1>
                             </Typography>
                         </Paper>
-                        <Paper zDepth={3} style={styles.paperRight}>
+                        <Paper style={styles.paperRight}>
                             <h3>Inactive Members</h3>
                             <Typography className={classes.number} gutterBottom variant="headline" component="h2">
                                 <h1>{props.inactiveMembers}</h1>
@@ -134,13 +134,13 @@ const MemberCard = (props) => {
                         </Paper>
                     </div>
                     <div style={styles.div}>
-                        <Paper zDepth={3} style={styles.paperTwoLeft}>
+                        <Paper style={styles.paperTwoLeft}>
                             <h3>Licensed Members</h3>
                             <Typography className={classes.number} gutterBottom variant="headline" component="h2">
                                 <h1>{props.licensedMembers}</h1>
                             </Typography>
                         </Paper> 
-                        <Paper zDepth={3} style={styles.paperTwoRight}>
+                        <Paper style={styles.paperTwoRight}>
                             <h3>Active Boards</h3>
                             <Typography className={classes.number} gutterBottom variant="headline" component="h2">
                                 <h1>{props.activeBoard}</h1>
@@ -148,13 +148,13 @@ const MemberCard = (props) => {
                         </Paper>
                     </div>
                     <div style={styles.div}>
-                        <Paper zDepth={3} style={styles.paperThreeLeft}>
+                        <Paper style={styles.paperThreeLeft}>
                             <h3>Deleted Boards</h3>
                             <Typography className={classes.number} gutterBottom variant="headline" component="h2">
                                 <h1>{props.deletedBoard}</h1>
                             </Typography>
                         </Paper>
-                        <Paper zDepth={3} style={styles.paperThreeRight}>
+                        <Paper style={styles.paperThreeRight}>
                             <h3>Archived Boards</h3>
                             <Typography className={classes.number} gutterBottom variant="headline" component="h2">
                                 <h1>{props.archivedBoard}</h1>
@@ -163,16 +163,6 @@ const MemberCard = (props) => {
                     </div>
                 </div>
 
-                // <Card className={classes.card}>
-                //     <CardContent>
-                //         <Typography className={classes.title} gutterBottom variant="headline" component="h2">
-                //             <p>Members: </p>
-                //         </Typography>
-                //         <Typography className={classes.number} gutterBottom variant="headline" component="h2">
-                //             <p>{props.activeMembers}</p>
-                //         </Typography>
-                //     </CardContent>
-                // </Card>
             ) : null}
         </div>
     )

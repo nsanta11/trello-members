@@ -20,9 +20,12 @@ export const customTheme = createMuiTheme({
 	palette: {
 		primary: {
 			main: purple600,
-		},
-		
-	},
+        },
+    },
+    datePicker: {
+        color: purple600,
+        calendarYearBackgroundColor: purple600,
+      },
 })
 
 
@@ -71,6 +74,7 @@ export default class DatePickerValueFrom extends React.Component {
                     hintText="From"
                     inputStyle={{ textAlign: 'left' }}
                     onChange={this.handleFromChange}
+                    // hideCalendarDate={props.componentDidMount()}
                     value={this.state.controlledDateFrom} 
                  
                 />
