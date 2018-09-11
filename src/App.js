@@ -36,7 +36,7 @@ class App extends Component {
     }
   }
 
-  //set default date to all time on load or on "clear"
+  //set default date to all time on load or on clear
   componentDidMount = (e) => {
     let today = moment().format('YYYY-MM-DD')
     console.log(today)
