@@ -54,6 +54,14 @@ export default class DatePickerValueFrom extends React.Component {
 
     // };
 
+    resetDate = () => {
+        this.state = {
+            controlledDateFrom: moment('').format('YYYY-MM-DD'),
+            formattedDateFrom: moment(controlledDateFrom).format('YYYY-MM-DD')
+        };
+
+    }
+
     handleFromChange = (date,event) => {
         this.setState({
               controlledDateFrom: event,
@@ -70,7 +78,7 @@ export default class DatePickerValueFrom extends React.Component {
 
         return (
             <div className="pickerOne">
-                <DatePicker className="calendarOne"
+                <DatePicker className="calendarOne" id="fromDate"
                     hintText="From"
                     inputStyle={{ textAlign: 'left' }}
                     onChange={this.handleFromChange}

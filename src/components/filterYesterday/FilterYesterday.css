@@ -1,0 +1,10 @@
+#div {
+    flex-direction: 'row wrap'
+}
+
+#table {
+    width: 800px;
+    margin-left: 32%;
+    margin-bottom: 10%;
+    flex: 1;
+}
