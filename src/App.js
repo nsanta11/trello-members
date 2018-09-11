@@ -54,16 +54,19 @@ class App extends Component {
         console.log(data2)
         let members = data1
         let actions = data2
+        
         console.log(actions.actionCounts.commentCard)
-        console.log(members.deletedBoardCount)
-        console.log((members.activeMemberCount))
         console.log((members.inactiveMemberCount))
+
+        //set state for member and action data
         this.setState({ members })
         this.setState({ actions })
 
-        //set state for member and action data
+        
         console.log("state", this.state.members)
         console.log("state", this.state.actions)
+
+        //define variable for activity data retrieval
         let action = actions.actionCounts
         this.setState({ action })
         console.log(this.state.actions.actionCounts.commentCard)
@@ -104,15 +107,17 @@ class App extends Component {
           let members = data1
           let actions = data2
           console.log(actions.actionCounts.commentCard)
-          console.log(members.deletedBoardCount)
           console.log((members.activeMemberCount))
-          console.log((members.inactiveMemberCount))
+
+          //set state for action and member data
           this.setState({ members })
           this.setState({ actions })
 
-          //set state for action and member data
+       
           console.log("state", this.state.members)
           console.log("state", this.state.actions)
+
+          //set variable for action to retrieve data
           let action = actions.actionCounts
           this.setState({ action })
           console.log(window.to)
@@ -146,13 +151,13 @@ class App extends Component {
           let actions = data2
 
           console.log(actions.actionCounts.commentCard)
-          console.log(members.deletedBoardCount)
-          console.log((members.activeMemberCount))
-          console.log((members.inactiveMemberCount))
+          console.log(members.activeMemberCount)
+        
+          //set state for member and action data
           this.setState({ members })
           this.setState({ actions })
 
-          //set state for member and action data
+      
           console.log("state", this.state.members)
           console.log("state", this.state.actions)
           let action = actions.actionCounts
