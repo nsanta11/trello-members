@@ -8,3 +8,26 @@
     margin-bottom: 10%;
     flex: 1;
 }
+
+.activity {
+    color: rgb(121, 56, 201);
+    font-size: 17px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: -370px;
+    margin-bottom: -100px
+    
+}
+
+.titleOne {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: -5px
+}
+    
+.titleTwo {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: -5px
+}

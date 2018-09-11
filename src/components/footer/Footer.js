@@ -1,7 +1,7 @@
 import React from 'react'
 import StickyFooter from 'react-sticky-footer';
 
-
+//Sticky footer component with minimized toggle version
 const Footer = () => {
     return (
         <div>
@@ -13,14 +13,14 @@ const Footer = () => {
                     color: "#6B3FA0"
                 }}
                 stickyStyles={{
-                    // backgroundColor: "rgba(255,255,255,.8)",
                     padding: "1.5rem",
                     color: "#6B3FA0"
                 }}
             >
                 Grand Canyon University © | All rights reserved
-</StickyFooter>
+            </StickyFooter>
         </div>
     )
 }
+
 export default Footer;

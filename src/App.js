@@ -253,9 +253,12 @@ class App extends Component {
           {/* <MemberData /> */}
         </div>
 
-        <p className="App-intro">
+        <h3 className="App-intro">
           Filters
-        </p>
+        </h3>
+        <h3 className="Report-intro">
+          Reports
+        </h3>
         <div>
           <MuiThemeProvider>
             <DatePickerValueFrom sendDatafrom={this.storeFrom} />

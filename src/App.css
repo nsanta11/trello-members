@@ -20,6 +20,8 @@
 
 .App-intro {
   font-size: large;
+  margin-left: -80%;
+  margin-top: 30px
 }
 
 .button1 {
@@ -36,6 +38,12 @@
   margin-left: -70% !important;
   width: 150px !important;
   margin-top: 10px !important;
+}
+
+.Report-intro {
+  margin-top: -42px;
+  margin-left: -30%
+
 }
 
 @keyframes App-logo-spin {

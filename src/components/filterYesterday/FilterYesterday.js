@@ -34,14 +34,17 @@ function SimpleTable(props) {
     console.log(props.action)
 
     return (
-        
-        <div style={styles.div}id="div">
+
+        <div style={styles.div} id="div">
             <Paper className={classes.root} id="table">
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow >
-                            <TableCell>Activity Type</TableCell>
-                            <TableCell numeric>Number</TableCell>
+                            <h4 className="activity">Activity Log</h4>
+                        </TableRow>
+                        <TableRow >
+                            <TableCell><h4 className="titleOne">Activity Type</h4></TableCell>
+                            <TableCell numeric><h4 className="titleTwo">Number</h4></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
