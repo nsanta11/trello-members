@@ -23,4 +23,5 @@ const Footer = () => {
     )
 }
 
+//export footer to parent
 export default Footer;

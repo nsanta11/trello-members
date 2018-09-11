@@ -1,16 +1,13 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
-// import Toolbar from '@material-ui/core/Toolbar'
-// import Typography from '@material-ui/core/Typography'
 import "./Navbar.css"
 import logo from '../../images/trello-report-banner.png'
 
-
+//Navbar component composition
 const NavBar = () => {
     return (
         <div>
             <AppBar position="static">
-                {/* <Toolbar> */}
                 <div className="wrapper">
                     <div className="wrapper1">
                         <div className="wrapper2">
@@ -18,9 +15,10 @@ const NavBar = () => {
                         </div>
                     </div>
                 </div>
-                {/* </Toolbar> */}
             </AppBar>
         </div>
     )
 }
+
+//export navbar to parent
 export default NavBar;

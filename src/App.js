@@ -1,58 +1,25 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-// import ReactDOM from 'react-dom'
-// import logo from './logo.svg';
-import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment'
 import './App.css';
-import ButtonStyled from "./components/filterYesterday/FilterYesterday";
-import customTheme from "./components/calendar/Calendar.js";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import NavBar from "./components/navbar/Navbar.js";
 import MemberCard from "./components/member/MemberCard";
 import StickyFooter from "./components/footer/Footer.js";
 import DatePickerValueFrom from "./components/calendar/Calendar.js";
 import DatePickerValueTo from "./components/calendar-to/CalendarTo.js";
-import GuttersGrid from "./components/grid/Grid.js";
 import FilterYesterday from "./components/filterYesterday/FilterYesterday";
-import formattedDateTo from "./components/calendar-to/CalendarTo.js";
-import { grey100 } from 'material-ui/styles/colors';
-import { purple600, white } from 'material-ui/styles/colors';
+import formattedDateTo from "./components/calendar-to/CalendarTo.js"
 
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: grey100
-  },
-
-  button: {
-    margin: theme.spacing.unit,
-    backgroundColor: purple600,
-    color: white
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing.unit * 2,
-  },
-
-
-});
-
-
-
-
-
+//App (parent) component
 class App extends Component {
 
   constructor(props) {
     super(props)
-    //this.handleClick = this.handleClick.bind(this);
+
+    //set state of inital values
     this.state = {
       controlledDateFrom: '',
       formattedDateFrom: '',
@@ -68,18 +35,18 @@ class App extends Component {
 
     }
   }
-  componentWillMount = (e) => {
+
+  //set default date to all time on load or on "clear"
+  componentDidMount = (e) => {
     let today = moment().format('YYYY-MM-DD')
     console.log(today)
 
-    // DatePickerValueFrom.resetDate()
-    // document.getElementById("fromDate").value = "j";
-    // this.setState({controlledDateFrom: ""})
-
+    //fetch api member and activity data
     Promise.all([
       fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/2000-01-01/end/" + today),
-      fetch
-        ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start/2000-01-01/end/" + today)])
+      fetch("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start/2000-01-01/end/" + today)
+    ])
+      //format json response and log data results
       .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
       .then(([data1, data2]) => {
 
@@ -94,6 +61,7 @@ class App extends Component {
         this.setState({ members })
         this.setState({ actions })
 
+        //set state for member and action data
         console.log("state", this.state.members)
         console.log("state", this.state.actions)
         let action = actions.actionCounts
@@ -106,34 +74,28 @@ class App extends Component {
 
   }
 
+  //handles click event for button filters by passing through day number arg
   handleClick = (e, days) => {
-    // const date = 0
-    // if (days == 6){
-    //   let months = days
-    //   months = moment().subtract(months, 'month').add(1, 'day')
-    //   console.log(months)
-    //   //  date = months.format('YYYY-MM-DD')
-    //   //  console.log(date)
-    // }
-    // else {
+
     console.log(days)
     let yesterday = moment().add(-days, 'days')
     console.log(yesterday)
     const date = yesterday.format('YYYY-MM-DD')
-    // }
     console.log(date)
     let today = moment().format('YYYY-MM-DD')
     console.log(today)
 
-    // .format('YYYY-MM-DD'),
+
     if (date) {
       console.log(("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + date + "/end/" + today))
 
       Promise.all([
         //api fetch to url with selected dates
         fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + date + "/end/" + today),
-        fetch
-          ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + date + "/end/" + today)])
+
+        fetch("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + date + "/end/" + today)
+      ])
+        //format json response and log data results
         .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
         .then(([data1, data2]) => {
 
@@ -148,6 +110,7 @@ class App extends Component {
           this.setState({ members })
           this.setState({ actions })
 
+          //set state for action and member data
           console.log("state", this.state.members)
           console.log("state", this.state.actions)
           let action = actions.actionCounts
@@ -158,52 +121,25 @@ class App extends Component {
     }
 
   }
-
-  //       .then(response => {
-  //         return response.json();
-  //       }).then(data => {
-
-  //         console.log(data)
-  //         let members = data
-  //         console.log(members.deletedBoardCount)
-  //         console.log((members.activeMemberCount))
-  //         console.log((members.inactiveMemberCount))
-  //         this.setState({ members })
-  //         console.log("state", this.state.members)
-
-
-
-  //       })
-
-  //   }
-  // }
-
-  //clears data in calendar selection and sets data to default
-  clearData = () => {
-    console.log("clear")
-    this.DatePickerValueTo.state = null;
-  }
-
 
   //"to" value from selected calendar date
   storeTo = (val) => {
     window.to = val
     console.log(val)
-    // console.log("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + window.from + "/end/" + window.to)
 
     if (window.from) {
 
-      // fetchData("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to).then
+      // fetching data from both the members and activities
       Promise.all([
         fetch("https://www.gcumedia.com/sample-data/api/reporting/activeBoardCount-deletedBoardCount-archivedBoardCount-activeMemberCount-licensedMemberCount-inactiveMemberCount/start/" + window.from + "/end/" + window.to),
-        fetch
-          ("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + window.from + "/end/" + window.to)
+
+        fetch("https://www.gcumedia.com/sample-data/api/reporting/actionCounts/start" + window.from + "/end/" + window.to)
       ])
+        //format json response and log data results
         .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
         .then(([data1, data2]) => {
 
 
-          // console.log(dataActions)
           console.log(data1)
           console.log(data2)
           let members = data1
@@ -216,6 +152,7 @@ class App extends Component {
           this.setState({ members })
           this.setState({ actions })
 
+          //set state for member and action data
           console.log("state", this.state.members)
           console.log("state", this.state.actions)
           let action = actions.actionCounts
@@ -225,21 +162,17 @@ class App extends Component {
         })
 
     }
-    // 
 
   }
 
+  //"from" value from selected calendar date
   storeFrom(val) {
     window.from = val
     console.log(val)
   }
 
-
+  //render app components
   render() {
-
-    // const { isLoading, error } = this.state;
-    // const { members, yesterday, button, actions } = this.state
-
 
     return (
 
@@ -250,7 +183,6 @@ class App extends Component {
         </Helmet>
         <div>
           <NavBar />
-          {/* <MemberData /> */}
         </div>
 
         <h3 className="App-intro">
@@ -266,14 +198,10 @@ class App extends Component {
         </div>
 
         <div>
-          <MuiThemeProvider theme={customTheme}>
+          <MuiThemeProvider>
             <DatePickerValueTo sendDatato={this.storeTo} />
-            {/* endDate={this.state.formattedDateTo} */}
           </MuiThemeProvider>
         </div>
-        {/* <div>
-          <GuttersGrid />
-        </div> */}
         <div>
           <Button variant="contained" className="button1" onClick={(e) => this.handleClick(e, 1800)}>
             All Time

@@ -6,7 +6,7 @@ import moment from 'moment'
 import { createMuiTheme } from '@material-ui/core'
 import { purple600 } from 'material-ui/styles/colors';
 
-
+//material ui theme colors styling
 export const customTheme = createMuiTheme({
 	palette: {
 		primary: {
@@ -19,40 +19,24 @@ export const customTheme = createMuiTheme({
       },
 })
 
-
+//set origin date
 let controlledDateFrom = ('2000-01-01');
 
+//export the value "from" date selected
 export default class DatePickerValueFrom extends React.Component {
 
     constructor(props) {
         super(props);
 
+        //set state of intial vaules and format 
         this.state = {
             controlledDateFrom: moment('').format('YYYY-MM-DD'),
             formattedDateFrom: moment(controlledDateFrom).format('YYYY-MM-DD')
         };
-        // console.log(this.state.controlledDateFrom)
     }
+   
 
-    // handleFromChange = (event, date) => {
-    //     this.setState({
-    //         controlledDateFrom: date,
-    //         formattedDateFrom: moment(date).format('YYYY-MM-DD')
-    //     });
-    //     // console.log(this.state.controlledDateFrom)
-    //    console.log(this.state.formattedDateFrom)
-    //     this.props.sendDatafrom(this.state.formattedDateFrom);
-
-    // };
-
-    resetDate = () => {
-        this.state = {
-            controlledDateFrom: moment('').format('YYYY-MM-DD'),
-            formattedDateFrom: moment(controlledDateFrom).format('YYYY-MM-DD')
-        };
-
-    }
-
+    //on calendar change sends formatted date values to parent (app.js)
     handleFromChange = (date,event) => {
         this.setState({
               controlledDateFrom: event,
@@ -64,18 +48,17 @@ export default class DatePickerValueFrom extends React.Component {
      
  
     };
-    render(props) {
-      
+
+   //render datepiceker component handles on change function
+    render() {
 
         return (
             <div className="pickerOne">
-                <DatePicker className="calendarOne" id="fromDate"
+                <DatePicker className="calendarOne" 
                     hintText="From"
                     inputStyle={{ textAlign: 'left' }}
                     onChange={this.handleFromChange}
-                    // hideCalendarDate={props.componentDidMount()}
-                    value={this.state.controlledDateFrom} 
-                 
+                    value={this.state.controlledDateFrom}  
                 />
             </div>
         );

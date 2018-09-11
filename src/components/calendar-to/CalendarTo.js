@@ -3,29 +3,26 @@ import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import moment from 'moment'
 import './CalendarTo.css';
-// import DatePicker from 'material-ui/core/Datepicker'
 
-/**
- * The Date Picker defaults to a portrait dialog. The `mode` property can be set to `landscape`.
- * You can also disable the Dialog passing `true` to the `disabled` property.
- * To display the year selection first, set the `openToYearSelection` property to `true`.
- */
 
+//set intial "from" value to current date
 let controlledDateTo = moment()
 
+//export datepicker "from" component to parent
 export default class DatePickerValueto extends React.Component {
 
     constructor(props) {
         super(props);
-        //this.sendData = this.sendData.bind();
 
+        //set state of initial values and define format
         this.state = {
             controlledDateTo: moment('').format('YYYY-MM-DD'),
             formattedDateTo: moment(controlledDateTo).format('YYYY-MM-DD')
         };
-        // console.log(this.state.controlledDateTo)
+        
     }
 
+    //handle change event to pass formatted values to parent component
     handleToChange = (date, event) => {
         this.setState({
             controlledDateTo: event,
@@ -36,7 +33,7 @@ export default class DatePickerValueto extends React.Component {
       });
     };
 
-
+    //render date picker and pass handle change function
     render(props) {
         return (
             <div className="pickerTwo">
